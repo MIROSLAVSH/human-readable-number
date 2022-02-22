@@ -30,12 +30,12 @@ module.exports = function toReadable(number) {
         let makeGroup = ([ones, tens, huns]) => {
             return [
                 num(huns) === 0 ? '' : a[huns] + ' hundred ',
-                num(ones) === 0 ? b[tens] : b[tens] && b[tens] + ' ' || '',
+                num(ones) === 0 ? b[tens] : b[tens] && b[tens] +' ',
                 a[tens + ones] || a[ones]
-            ].join('');
+            ].join('')
         };
 
-        let thousand = (group, i) => group === '' ? group : `${group} ${g[i]}`;
+        let thousand = (group, i) => group === '' ? group : `${group} ${g[i]}`.trimEnd();
 
         if (typeof n === 'number')
             return toReadable(String(n));
@@ -48,8 +48,10 @@ module.exports = function toReadable(number) {
                 .filter(comp(not)(isEmpty))
                 .reverse()
                 .join('');
+        
     };
 
-    return toReadable(number);
+    return toReadable(number+'');
 
 }
+
